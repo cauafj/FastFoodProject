@@ -1,0 +1,15 @@
+.sidebar {
+    background-color: aliceblue;
+    width: 18.5vw;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    padding: 0;
+}
+
+.sidebar > h1 {
+    margin: 8px;
+    color: brown;
+    text-align: center;
+    font-size: 40px;
+}

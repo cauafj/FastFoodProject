@@ -1,0 +1,35 @@
+.obsbarContainer {
+    height: 19vh;
+    width: 80vw;
+    background-color: aliceblue;
+    position: fixed;
+    bottom: 0;
+    left: 0.5vw;
+    padding: 0;
+    display: grid;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    /* 
+    border: 5pt solid black */
+}
+
+.obsbarContainer > h4 {
+    margin: 0;
+}
+
+.formObs {
+    padding: 10px;
+    gap: 10px;
+    display: grid;
+    grid-template-columns: 4fr 2fr 1fr;
+}
+
+.checkboxes {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.checkboxes > div {
+    border: 1pt solid brown
+}
