@@ -19,10 +19,9 @@ export default function Sidebar(props) {
 
     const returnProdObs = (prodObs, completeProd) => {
         if(prodObs !== undefined) {
-            console.log("cu")
             return prodObs.map(e => {
                 return (
-                    <div>{e.obsName}/{e.obsQtd}/id:{completeProd.qtd}</div>
+                    <div>{e.obsName}/{e.obsQtd}</div>
                 )
             })
 

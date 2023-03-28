@@ -33,11 +33,16 @@ export default function Home() {
             name: obsBarData.name,
             price: obsBarData.price,
             qtd: 1,
-            obsses: (obsBarData.obs.map(e => {return{obsName: e, obsQtd: 1}}))
+            obsses: (obsBarData.obs.sort().map(e => {return{obsName: e, obsQtd: 1}}))
         }
 
         console.log("arrayProduct")
         console.log(arrayProduct)
+
+        if(arrayProduct.obsses.length > 1){
+            const obsNames = arrayProduct.obsses.map(e => e.obsName)
+            arrayProduct.obsses = [{obsName: obsNames.sort().join(" "), obsQtd: 1}]
+        }
 
         if(productAtCart === undefined){
             sideBarData.push(arrayProduct)
@@ -54,13 +59,15 @@ export default function Home() {
                     arrayProduct.obsses.forEach(el => {
                         if(el.obsName === e.obsName){
                             e.obsQtd+=1
-                        } else if(sideBarData[index].obsses.find(e => e.obsName === el.obsName) === undefined){
+                        } else if(sideBarData[index].obsses.find(e => e.obsName === el.obsName) === undefined || sideBarData[index].obsses === []){
+                            console.log("julio")
                             sideBarData[index].obsses.push(el)
 
                         }
                     })
                 })
             }
+            if(!sideBarData[index].obsses.length) sideBarData[index].obsses.push(arrayProduct.obsses[0])
         }
         attSideBarData(sideBarData)
         attSideBar()
