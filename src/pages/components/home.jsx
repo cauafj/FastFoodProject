@@ -41,7 +41,7 @@ export default function Home() {
 
         if(arrayProduct.obsses.length > 1){
             const obsNames = arrayProduct.obsses.map(e => e.obsName)
-            arrayProduct.obsses = [{obsName: obsNames.sort().join(" "), obsQtd: 1}]
+            arrayProduct.obsses = [{obsName: obsNames.sort().join("/"), obsQtd: 1}]
         }
 
         if(productAtCart === undefined){
@@ -54,6 +54,8 @@ export default function Home() {
             console.log(index)
             console.log(sideBarData[index])
 
+            arrayProduct.obsses = arrayProduct.obsses.filter(e => e !== undefined)
+            sideBarData[index].obsses = sideBarData[index].obsses.filter(e => e !== undefined)
             if(arrayProduct.obsses.length) {
                 sideBarData[index].obsses.forEach(e => {
                     arrayProduct.obsses.forEach(el => {
