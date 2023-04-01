@@ -10,18 +10,13 @@ export default function Home() {
         setSideBarData(data)
     }
 
-    const [sideBar, setSideBar] = useState(
-        <Sidebar title="Nota Fiscal" prods={sideBarData}></Sidebar>
-    )
-    const attSideBar = () => {
-        setSideBar(<Sidebar title="Nota Fiscal" prods={sideBarData}></Sidebar>)
-    }
-
     const [obsBar, setObsBar] = useState(<Obsbar state={0}></Obsbar>)
 
     const obsBarWithProduct = (product) => setObsBar(
         <Obsbar state={1} product={product} childToParent={obsBarToHome}></Obsbar>
     )
+
+    
 
     const obsBarToHome = (obsBarData) => {
         setObsBar(<Obsbar state={0}></Obsbar>)
@@ -72,7 +67,6 @@ export default function Home() {
             if(!sideBarData[index].obsses.length) sideBarData[index].obsses.push(arrayProduct.obsses[0])
         }
         attSideBarData(sideBarData)
-        attSideBar()
     }
 
     return (
@@ -169,7 +163,7 @@ export default function Home() {
                 </div>
             </div>
             {obsBar}
-            {sideBar}
+            <Sidebar title="Nota Fiscal" prods={sideBarData} attSideBarData={attSideBarData}></Sidebar>
         </div>
     )
 }

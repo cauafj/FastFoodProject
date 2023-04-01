@@ -16,9 +16,23 @@ export default function Sidebar(props) {
         } else return null
     }
 
+    const attProduct = (type, productType, event) => {
+        if(productType === "baseProduct") {
+            const index = props.prods.findIndex(e => e.name === event.target.name)
+            if(type === 0){
+                props.prods[index].qtd = props.prods[index].qtd - 1
+            } else {
+                props.prods[index].qtd = props.prods[index].qtd + 1
+            }
+        } else {
+
+        } 
+        props.attSideBarData(props.prods)
+    }
+
     const fullPrice = props.prods !== undefined ? props.prods.reduce((start, e) => start + e.price*e.qtd,0) : 0
 
-    const screenDivs = props.prods.map(e => {return (<div className="productDiv"><h3>{e.name} x{e.qtd} - R${e.price*e.qtd}</h3>{returnProdObs(e.obsses, e)}</div>)})
+    const screenDivs = props.prods.map(e => {return (<div className="productDiv"><h3>{e.name} x{e.qtd} - R${e.price*e.qtd}<button name={e.name} onClick={(e) => attProduct(0, "baseProduct", e)}>-</button><button name={e.name} onClick={(e) => attProduct(1, "baseProduct", e)}>+</button></h3>{returnProdObs(e.obsses, e)}</div>)})
     
     const [payMeth, setPayMeth] = useState("Forma de pagamento")
 
