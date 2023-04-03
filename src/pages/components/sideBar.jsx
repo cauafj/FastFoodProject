@@ -1,11 +1,11 @@
 import "../../styles/sideBar.css"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function Sidebar(props) {
+    const prods = props.prods
+
     const returnProdObs = (prodObs) => {
         prodObs = prodObs.filter(e => e !== undefined)
-        console.log("prodObs")
-        console.log(prodObs)
         if(prodObs.length) {
             return prodObs.map(e => {
                 return (
@@ -18,29 +18,39 @@ export default function Sidebar(props) {
 
     const attProduct = (type, productType, event) => {
         if(productType === "baseProduct") {
-            const index = props.prods.findIndex(e => e.name === event.target.name)
+            const index = prods.findIndex(e => e.name === event.target.name)
             if(type === 0){
-                props.prods[index].qtd = props.prods[index].qtd - 1
+                prods[index].qtd = prods[index].qtd - 1
             } else {
-                props.prods[index].qtd = props.prods[index].qtd + 1
+                prods[index].qtd = prods[index].qtd + 1
             }
+
         } else {
 
         } 
-        props.attSideBarData(props.prods)
+        props.attSideBarData(prods)
+        setScreenDivs(prods.map(e => {return (<div className="productDiv"><h3>{e.name} x{e.qtd} - R${e.price*e.qtd}<button name={e.name} onClick={(e) => attProduct(0, "baseProduct", e)}>-</button><button name={e.name} onClick={(e) => attProduct(1, "baseProduct", e)}>+</button></h3>{returnProdObs(e.obsses, e)}</div>)}))
     }
 
-    const fullPrice = props.prods !== undefined ? props.prods.reduce((start, e) => start + e.price*e.qtd,0) : 0
-
-    const screenDivs = props.prods.map(e => {return (<div className="productDiv"><h3>{e.name} x{e.qtd} - R${e.price*e.qtd}<button name={e.name} onClick={(e) => attProduct(0, "baseProduct", e)}>-</button><button name={e.name} onClick={(e) => attProduct(1, "baseProduct", e)}>+</button></h3>{returnProdObs(e.obsses, e)}</div>)})
+    const [screenDivs, setScreenDivs] = useState(prods.map(e => {return (<div className="productDiv"><h3>{e.name} x{e.qtd} - R${e.price*e.qtd}<button name={e.name} onClick={(e) => attProduct(0, "baseProduct", e)}>-</button><button name={e.name} onClick={(e) => attProduct(1, "baseProduct", e)}>+</button></h3>{returnProdObs(e.obsses, e)}</div>)}))
     
+    const attScreenDivs = () => {
+        setScreenDivs(prods.map(e => {return (<div className="productDiv"><h3>{e.name} x{e.qtd} - R${e.price*e.qtd}<button name={e.name} onClick={(e) => attProduct(0, "baseProduct", e)}>-</button><button name={e.name} onClick={(e) => attProduct(1, "baseProduct", e)}>+</button></h3>{returnProdObs(e.obsses, e)}</div>)}))
+        console.log("bagualou")
+    }
+
+    const fullPrice = prods !== undefined ? prods.reduce((start, e) => start + e.price*e.qtd,0) : 0
+
     const [payMeth, setPayMeth] = useState("Forma de pagamento")
 
     let txtArea = ""
     const attTxtArea = (event) => {
         txtArea = event.target.value
-        console.log(txtArea)
     }
+
+    useEffect(() => {
+        attScreenDivs()
+    }, [props])
 
     return (
         <div className="sidebar">

@@ -2,10 +2,11 @@ import "../../styles/home.css"
 import Sidebar from "./sideBar.jsx"
 import products from "../../constants/products.json"
 import Obsbar from "./obsbar.jsx"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function Home() {
     const [sideBarData, setSideBarData] = useState([])
+
     const attSideBarData = (data) => {
         setSideBarData(data)
     }
@@ -15,8 +16,6 @@ export default function Home() {
     const obsBarWithProduct = (product) => setObsBar(
         <Obsbar state={1} product={product} childToParent={obsBarToHome}></Obsbar>
     )
-
-    
 
     const obsBarToHome = (obsBarData) => {
         setObsBar(<Obsbar state={0}></Obsbar>)
