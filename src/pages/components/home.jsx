@@ -2,7 +2,7 @@ import "../../styles/home.css"
 import Sidebar from "./sideBar.jsx"
 import products from "../../constants/products.json"
 import Obsbar from "./obsbar.jsx"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 export default function Home() {
     const [sideBarData, setSideBarData] = useState([])

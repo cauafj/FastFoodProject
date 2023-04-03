@@ -3,39 +3,57 @@ import { useState, useEffect } from "react"
 
 export default function Sidebar(props) {
     const prods = props.prods
+    console.log("obsses")
+    console.log(prods[0])
 
-    const returnProdObs = (prodObs) => {
+    const attProduct = (type, productType, event) => {
+        const productIndex = prods.findIndex(e => e.name === event.target.name)
+        if(productType === "baseProduct") {
+            if(type === 0){
+                prods[productIndex].qtd = prods[productIndex].qtd - 1
+            } else {
+                prods[productIndex].qtd = prods[productIndex].qtd + 1
+            }
+
+        } else {
+            const obsIndex = prods[productIndex].obsses.findIndex(e => e.obsName === event.target.id)
+            if(type === 0){
+                prods[productIndex].obsses[obsIndex].obsQtd = prods[productIndex].obsses[obsIndex].obsQtd - 1
+                prods[productIndex].qtd = prods[productIndex].qtd - 1
+            } else {
+                prods[productIndex].obsses[obsIndex].obsQtd = prods[productIndex].obsses[obsIndex].obsQtd + 1
+                prods[productIndex].qtd = prods[productIndex].qtd + 1
+            }
+
+            if(prods[productIndex].obsses[obsIndex].obsQtd === 0) {
+                prods[productIndex].obsses.splice(obsIndex, 1)
+            }
+        } 
+
+        if(prods[productIndex].qtd === 0) {
+            prods.splice(productIndex, 1)
+        }
+
+        props.attSideBarData(prods)
+        setScreenDivs(prods.map(e => {return (<div className="productDiv"><h3>{e.name} x{e.qtd} - R${e.price*e.qtd}<button name={e.name} onClick={(e) => attProduct(0, "baseProduct", e)}>-</button><button name={e.name} onClick={(e) => attProduct(1, "baseProduct", e)}>+</button></h3>{returnProdObs(e.obsses, e.name)}</div>)}))
+    }
+
+    const returnProdObs = (prodObs, productName) => {
         prodObs = prodObs.filter(e => e !== undefined)
         if(prodObs.length) {
             return prodObs.map(e => {
                 return (
-                    <p className="obsP">{e.obsName} x{e.obsQtd}</p>
+                    <p className="obsP">{e.obsName} x{e.obsQtd}<button name={productName} id={e.obsName} onClick={(e) => attProduct(0, "productObs", e)}>-</button><button name={productName} id={e.obsName} onClick={(e) => attProduct(1, "productObs", e)}>+</button></p>
                 )
             })
 
         } else return null
     }
 
-    const attProduct = (type, productType, event) => {
-        if(productType === "baseProduct") {
-            const index = prods.findIndex(e => e.name === event.target.name)
-            if(type === 0){
-                prods[index].qtd = prods[index].qtd - 1
-            } else {
-                prods[index].qtd = prods[index].qtd + 1
-            }
-
-        } else {
-
-        } 
-        props.attSideBarData(prods)
-        setScreenDivs(prods.map(e => {return (<div className="productDiv"><h3>{e.name} x{e.qtd} - R${e.price*e.qtd}<button name={e.name} onClick={(e) => attProduct(0, "baseProduct", e)}>-</button><button name={e.name} onClick={(e) => attProduct(1, "baseProduct", e)}>+</button></h3>{returnProdObs(e.obsses, e)}</div>)}))
-    }
-
-    const [screenDivs, setScreenDivs] = useState(prods.map(e => {return (<div className="productDiv"><h3>{e.name} x{e.qtd} - R${e.price*e.qtd}<button name={e.name} onClick={(e) => attProduct(0, "baseProduct", e)}>-</button><button name={e.name} onClick={(e) => attProduct(1, "baseProduct", e)}>+</button></h3>{returnProdObs(e.obsses, e)}</div>)}))
+    const [screenDivs, setScreenDivs] = useState(prods.map(e => {return (<div className="productDiv"><h3>{e.name} x{e.qtd} - R${e.price*e.qtd}<button name={e.name} onClick={(e) => attProduct(0, "baseProduct", e)}>-</button><button name={e.name} onClick={(e) => attProduct(1, "baseProduct", e)}>+</button></h3>{returnProdObs(e.obsses, e.name)}</div>)}))
     
     const attScreenDivs = () => {
-        setScreenDivs(prods.map(e => {return (<div className="productDiv"><h3>{e.name} x{e.qtd} - R${e.price*e.qtd}<button name={e.name} onClick={(e) => attProduct(0, "baseProduct", e)}>-</button><button name={e.name} onClick={(e) => attProduct(1, "baseProduct", e)}>+</button></h3>{returnProdObs(e.obsses, e)}</div>)}))
+        setScreenDivs(prods.map(e => {return (<div className="productDiv"><h3>{e.name} x{e.qtd} - R${e.price*e.qtd}<button name={e.name} onClick={(e) => attProduct(0, "baseProduct", e)}>-</button><button name={e.name} onClick={(e) => attProduct(1, "baseProduct", e)}>+</button></h3>{returnProdObs(e.obsses, e.name)}</div>)}))
         console.log("bagualou")
     }
 
