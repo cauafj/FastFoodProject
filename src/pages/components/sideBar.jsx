@@ -66,13 +66,17 @@ export default function Sidebar(props) {
         txtArea = event.target.value
     }
 
+    const print = () => {
+        
+    }
+
     useEffect(() => {
         attScreenDivs()
     }, [props])
 
     return (
         <div className="sidebar">
-            <div className="head"><h1>{props.title}</h1><button>imprimir</button></div>
+            <div className="head"><h1>{props.title}</h1><button onClick={() => print}>imprimir</button></div>
             <div id="underTitle">
                 <div className="productsArray">
                     {screenDivs}
