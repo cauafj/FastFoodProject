@@ -21,7 +21,7 @@ export default function pdfGenerator(prods, fullPrice, txtArea, payMeth) {
             return {
                 text: `${e.name} x${e.qtd} - R$${e.price.toFixed(2)}\n${
                             (e.obsses.length) ? e.obsses.map(el => {return (`${el.obsName} x${el.obsQtd}\n`)}) : ""
-                        }`,
+                        }`.replace(',', ""),
     
                 marginBottom: 10
             }
