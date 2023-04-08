@@ -54,6 +54,7 @@ export default function Obsbar(props) {
                     <label>{element}</label>
                 )
             })
+        
 
             return (
                 <div className="obsbarContainer">

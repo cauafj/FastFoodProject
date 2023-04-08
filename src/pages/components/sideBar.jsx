@@ -1,5 +1,6 @@
 import "../../styles/sideBar.css"
 import { useState, useEffect } from "react"
+import pdfGenerator from "../../reports/pdfGenerator"
 
 export default function Sidebar(props) {
     const prods = props.prods
@@ -61,13 +62,10 @@ export default function Sidebar(props) {
 
     const [payMeth, setPayMeth] = useState("Forma de pagamento")
 
-    let txtArea = ""
+    const [txtArea, setTextArea] = useState("")
     const attTxtArea = (event) => {
-        txtArea = event.target.value
-    }
-
-    const print = () => {
-        
+        setTextArea(event.target.value)
+        console.log(txtArea)
     }
 
     useEffect(() => {
@@ -76,7 +74,7 @@ export default function Sidebar(props) {
 
     return (
         <div className="sidebar">
-            <div className="head"><h1>{props.title}</h1><button onClick={() => print}>imprimir</button></div>
+            <div className="head"><h1>{props.title}</h1><button onClick={() => pdfGenerator(prods, fullPrice, txtArea, payMeth)}>imprimir</button></div>
             <div id="underTitle">
                 <div className="productsArray">
                     {screenDivs}
@@ -84,7 +82,7 @@ export default function Sidebar(props) {
                 <div className="fixedDiv">
                     <h3>R${fullPrice.toFixed(2)}</h3>
                     <div className="obsNote">
-                        <textarea onChange={attTxtArea}></textarea>
+                        <textarea id="textareaobs" onChange={attTxtArea}></textarea>
                     </div>
                     <h3 className="payment">{(payMeth[0].toUpperCase() + payMeth.substring(1)).replace("ta", "tã")}</h3>
                     <div className="paymentChoice">
