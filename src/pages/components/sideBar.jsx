@@ -52,11 +52,6 @@ export default function Sidebar(props) {
     }
 
     const [screenDivs, setScreenDivs] = useState(prods.map(e => {return (<div className="productDiv"><h3>{e.name} x{e.qtd} - R${e.price*e.qtd}<button name={e.name} onClick={(e) => attProduct(0, "baseProduct", e)}>-</button><button name={e.name} onClick={(e) => attProduct(1, "baseProduct", e)}>+</button></h3>{returnProdObs(e.obsses, e.name)}</div>)}))
-    
-    const attScreenDivs = () => {
-        setScreenDivs(prods.map(e => {return (<div className="productDiv"><h3>{e.name} x{e.qtd} - R${e.price*e.qtd}<button name={e.name} onClick={(e) => attProduct(0, "baseProduct", e)}>-</button><button name={e.name} onClick={(e) => attProduct(1, "baseProduct", e)}>+</button></h3>{returnProdObs(e.obsses, e.name)}</div>)}))
-        console.log("bagualou")
-    }
 
     const fullPrice = prods !== undefined ? prods.reduce((start, e) => start + e.price*e.qtd,0) : 0
 
@@ -69,7 +64,8 @@ export default function Sidebar(props) {
     }
 
     useEffect(() => {
-        attScreenDivs()
+        setScreenDivs(prods.map(e => {return (<div className="productDiv"><h3>{e.name} x{e.qtd} - R${e.price*e.qtd}<button name={e.name} onClick={(e) => attProduct(0, "baseProduct", e)}>-</button><button name={e.name} onClick={(e) => attProduct(1, "baseProduct", e)}>+</button></h3>{returnProdObs(e.obsses, e.name)}</div>)}))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props])
 
     return (
