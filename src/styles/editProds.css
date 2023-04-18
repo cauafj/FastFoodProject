@@ -1,0 +1,43 @@
+.cadContainer {
+    background-color: aliceblue;
+    position: fixed;
+    margin-left: 20vw;
+    height: 100vh;
+    width: 60vw;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cadContainer > h2 {
+    font-size: 50px;
+    color: brown;
+}
+
+.choiceOpt {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 45vw;
+    gap: 10px
+}
+
+.choiceOpt > button {
+    border-radius: 10px;
+    border: 2pt solid brown;
+    height: 8vh;
+    background-color: aliceblue;
+    color: brown;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.choiceOpt > button:hover {
+    background-color: brown;
+    color: aliceblue;
+}
+
+.choiceOpt > button:active {
+    background-color: aliceblue;
+    color: brown;
+}
