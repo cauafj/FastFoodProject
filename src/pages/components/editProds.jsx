@@ -4,7 +4,7 @@ import ChanginMenu from "./changingMenu.jsx"
 import api from "../../services/api.js"
 
 
-export default function CadProds() {
+export default function EditProds() {
     const [changingMenu, setChangingMenu] = useState(0)
     const [prods, setProds] = useState([])
     const att = (state) => {
