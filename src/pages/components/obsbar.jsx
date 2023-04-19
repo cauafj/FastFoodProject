@@ -70,5 +70,7 @@ export default function Obsbar(props) {
                 </div>
             )
 
+        default:
+            console.log("Nenhum case da obsbar encontrado")
     }
 }
