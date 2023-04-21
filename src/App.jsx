@@ -10,9 +10,8 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path='/home' element={<Home></Home>}></Route>
+        <Route path='/' element={<Home></Home>}></Route>
         <Route path='/edit' element={<EditProds></EditProds>}></Route>
-        <Route path='*' element={<h1 style={{color: "aliceblue", textAlign: "center"}}>Você digitou uma rota inválida</h1>}></Route>
       </Routes>
     </div>
   );
