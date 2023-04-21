@@ -1,5 +1,5 @@
 import axios from "axios"
 
 export default axios.create({
-    baseURL: "http://localhost:5000/"
+    baseURL: "https://fastfood-no2b.onrender.com"
 })
