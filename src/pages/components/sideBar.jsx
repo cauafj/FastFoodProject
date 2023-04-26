@@ -70,7 +70,7 @@ export default function Sidebar(props) {
 
     return (
         <div className="sidebar">
-            <div className="head"><h1>{props.title}</h1><button onClick={() => pdfGenerator(prods, fullPrice, txtArea, payMeth)}>imprimir</button></div>
+            <div className="head"><h1>{props.title}</h1><button onClick={() => pdfGenerator(prods, fullPrice, txtArea, payMeth)}>imprimir</button><button onClick={() => props.attSideBarData([])}>limpar</button></div>
             <div id="underTitle">
                 <div className="productsArray">
                     {screenDivs}

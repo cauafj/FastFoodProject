@@ -11,7 +11,7 @@
     margin: 8px;
     color: brown;
     text-align: center;
-    font-size: 32px;
+    font-size: 22px;
 }
 
 .head {
@@ -25,6 +25,7 @@
     background-color: aliceblue;
     border: 2pt solid brown;
     border-radius: 5px;
+    margin-left: 2px;
 }
 .head button:hover {
     background-color: brown;
