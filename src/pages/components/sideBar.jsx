@@ -68,9 +68,14 @@ export default function Sidebar(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props])
 
+    const clear = () => {
+        props.attSideBarData([])
+        setTextArea("")
+    }
+
     return (
         <div className="sidebar">
-            <div className="head"><h1>{props.title}</h1><button onClick={() => pdfGenerator(prods, fullPrice, txtArea, payMeth)}>imprimir</button><button onClick={() => props.attSideBarData([])}>limpar</button></div>
+            <div className="head"><h1>{props.title}</h1><button onClick={() => pdfGenerator(prods, fullPrice, txtArea, payMeth)}>imprimir</button><button onClick={clear}>limpar</button></div>
             <div id="underTitle">
                 <div className="productsArray">
                     {screenDivs}
@@ -78,7 +83,7 @@ export default function Sidebar(props) {
                 <div className="fixedDiv">
                     <h3>R${fullPrice.toFixed(2)}</h3>
                     <div className="obsNote">
-                        <textarea id="textareaobs" onChange={attTxtArea}></textarea>
+                        <textarea value={txtArea} id="textareaobs" onChange={attTxtArea}></textarea>
                     </div>
                     <h3 className="payment">{(payMeth[0].toUpperCase() + payMeth.substring(1)).replace("ta", "tã")}</h3>
                     <div className="paymentChoice">
